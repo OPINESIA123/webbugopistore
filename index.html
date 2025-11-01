@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPI X BUG -Login</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Nosifer&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    /* KEEP ALL YOUR EXISTING CSS STYLES */
+    :root {
+      --purple-main: #c084fc;
+      --purple-neon: #d946ef;
+      --purple-glow: #a21caf;
+      --dark-bg: #060014;
+      --text-light: #fff;
+      --card-bg: rgba(24, 0, 45, 0.9);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--dark-bg) url('/assets/bg.jpg') center center/cover no-repeat;
+      min-height: 100vh;
+      color: var(--purple-main);
+      font-family: 'UnifrakturCook', cursive;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* KEEP ALL YOUR BEAUTIFUL ANIMATIONS AND STYLES */
+    /* ... (semua CSS yang ada tetap dipertahankan) ... */
+
+  </style>
+</head>
+
+<body>
+  <div class="card">
+    <div class="profile">
+      <img src="https://res.cloudinary.com/shaa/image/upload/v1757339222/shaastore/o35g1v4so0tnczirobmz.jpg" alt="Profile" />
+    </div>
+    <div class="title">OPI X BUG</div>
+    <div class="subtitle">© 2025 OPI. All rights reserved.</div>
+
+    <!-- UBAH FORM ACTION MENJADI JAVASCRIPT -->
+    <form id="loginForm">
+      <div class="form-group">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Username" required autocomplete="username"/>
+      </div>
+      <div class="form-group">
+        <i class="fas fa-key"></i>
+        <!-- UBAH TYPE MENJADI PASSWORD -->
+        <input type="password" name="key" placeholder="Password" required autocomplete="current-password"/>
+      </div>
+      <button type="submit">
+        <i class="fas fa-biohazard" style="margin-right: 8px;"></i>
+        L O G I N
+        <i class="fas fa-biohazard" style="margin-left: 8px;"></i>
+      </button>
+    </form>
+
+    <a class="buy-access" href="https://t.me/OPINESIA" target="_blank">
+      <i class="fas fa-coins"></i> Buy Key Access
+    </a>
+  </div>
+
+  <div id="toast" class="toast" style="display:none;"></div>
+
+  <script>
+    // Handle form submission dengan JavaScript
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = new FormData(this);
+      const username = formData.get('username');
+      const password = formData.get('key');
+      
+      // Tampilkan loading
+      const button = this.querySelector('button');
+      const originalText = button.innerHTML;
+      button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> LOADING...';
+      button.disabled = true;
+      
+      // Simulasi proses login
+      setTimeout(() => {
+        // GANTI DENGAN LOGIN REAL DI SINI
+        if (username && password) {
+          showToast('Login berhasil! Redirecting...', 'success');
+          // Redirect ke dashboard atau halaman setelah login
+          setTimeout(() => {
+            window.location.href = '/dashboard.html';
+          }, 2000);
+        } else {
+          showToast('Username dan password harus diisi!', 'error');
+        }
+        
+        // Reset button
+        button.innerHTML = originalText;
+        button.disabled = false;
+      }, 1500);
+    });
+    
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.style.display = 'block';
+      
+      // Reset toast setelah 3 detik
+      setTimeout(() => {
+        toast.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Handle URL parameters untuk pesan
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    if (msg) {
+      showToast(msg);
+    }
+  </script>
+</body>
+</html>
